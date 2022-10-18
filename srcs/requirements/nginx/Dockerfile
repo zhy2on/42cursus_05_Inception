@@ -9,6 +9,6 @@ COPY ./tools/create_ssl.sh /tmp/
 RUN apt-get install -y openssl && \
 	chmod +x /tmp/create_ssl.sh
 
-ENTRYPOINT ["/tmp/create_ssl.sh"]
+ENTRYPOINT [ "/tmp/create_ssl.sh" ]
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "nginx", "-g", "daemon off;" ]
