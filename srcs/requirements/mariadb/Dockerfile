@@ -12,4 +12,4 @@ RUN chmod +x /tmp/entrypoint.sh
 
 ENTRYPOINT [ "/tmp/entrypoint.sh" ]
 
-# CMD [ "mysqld" ]
+CMD [ "mysqld" ]
