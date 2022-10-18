@@ -2,11 +2,34 @@ version: "3.9"
 services:
   nginx:
     container_name: nginx
-    build: ./requirements/nginx
+    build: ./requirements/nginx/
     ports:
       - "443:443"
     networks:
       - frontend
+    env_file:
+      - .env
+
+  # mariadb:
+  #   container_name: mariadb
+  #   build: ./requirements/mariadb/
+  #   ports:
+  #     - "3306:3306"
+  #   networks:
+  #     - backend
+  #   env_file:
+  #     - .env
+
+  # wordpress:
+  #   container_name: wordpress
+  #   build: ./requirements/wordpress/
+  #   ports:
+  #     - "9000:9000"
+  #   networks:
+  #     - frontend
+  #     - backend
+  #   env_file:
+  #     - .env
 
 networks:
   frontend:

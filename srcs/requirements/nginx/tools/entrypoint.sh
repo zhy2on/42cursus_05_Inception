@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-sed -i "s/server_name _;/server_name $DOMAIN_NAME;/" /etc/nginx/sites-available/default
+sed -i s/'$DOMAIN_NAME'/$DOMAIN_NAME/g /etc/nginx/sites-available/default
 
 if [ ! -f /etc/ssl/certs/nginx.crt ]; then
 	openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
