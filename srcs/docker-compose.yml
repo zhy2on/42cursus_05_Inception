@@ -1,24 +1,26 @@
 version: "3.9"
 services:
-  nginx:
-    container_name: nginx
-    build: ./requirements/nginx/
-    ports:
-      - "443:443"
-    networks:
-      - frontend
-    env_file:
-      - .env
-
-  # mariadb:
-  #   container_name: mariadb
-  #   build: ./requirements/mariadb/
+  # nginx:
+  #   container_name: nginx
+  #   build: ./requirements/nginx/
   #   ports:
-  #     - "3306:3306"
+  #     - "443:443"
   #   networks:
-  #     - backend
+  #     - frontend
   #   env_file:
   #     - .env
+
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb/
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    env_file:
+      - .env
+    volumes:
+      - "db:/var/lib/mysql"
 
   # wordpress:
   #   container_name: wordpress
@@ -36,3 +38,15 @@ networks:
     name: frontend
   backend:
     name: backend
+
+volumes:
+  db:
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jihoh/data/db
+#   wp:
+#     driver_opts:
+#       type: "none"
+#       o: "bind"
+#       device: "/home/jihoh/data/wp"
