@@ -5,7 +5,7 @@ RUN apt-get update && \
 
 EXPOSE 3306
 
-COPY ./conf/set_db.sql /tmp/
+COPY ./conf/db-config.sql /tmp/
 COPY ./tools/entrypoint.sh /tmp/
 
 RUN chmod +x /tmp/entrypoint.sh
