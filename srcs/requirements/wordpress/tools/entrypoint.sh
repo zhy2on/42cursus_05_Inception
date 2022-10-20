@@ -10,10 +10,10 @@ if [ ! -f /var/www/html/wordpress/wp-config.php ]; then
 	wp core install --url=$DOMAIN_NAME --title="$WP_TITLE" --admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --allow-root
 	wp user create $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWORD --role=author --allow-root 
 	chown -R www-data:www-data /var/www/html/wordpress
-
-	# create the PID file(/run/php/php7.3-fpm.pid)
-	service php7.3-fpm start
-	service php7.3-fpm stop
 fi
+
+# create the PID file(/run/php/php7.3-fpm.pid)
+service php7.3-fpm start
+service php7.3-fpm stop
 
 exec "$@"
