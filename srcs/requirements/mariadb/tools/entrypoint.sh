@@ -9,4 +9,6 @@ service mysql start
 mariadb < /tmp/db-config.sql && sleep 1
 service mysql stop
 
+echo "*****Starting MariaDB Container*****"
+
 exec "$@"

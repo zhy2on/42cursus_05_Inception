@@ -10,4 +10,6 @@ if [ ! -f /etc/ssl/certs/nginx.crt ]; then
 		-subj "/C=KR/ST=Seoul/L=Seoul/O=wordpress/CN=$DOMAIN_NAME";
 fi
 
+echo "*****Starting Nginx Container*****"
+
 exec "$@"
