@@ -6,7 +6,7 @@
 #    By: jihoh <jihoh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/20 15:06:09 by jihoh             #+#    #+#              #
-#    Updated: 2022/10/20 16:59:24 by jihoh            ###   ########.fr        #
+#    Updated: 2022/10/20 17:37:33 by jihoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,16 +31,20 @@ restart:
 	@ make up
 
 destroy:
-	@ docker compose  -f $(FILE) -p $(NAME) down --rmi all --volumes --remove-orphans
+	@ rm -rf /home/jihoh/data/wp/*
+	@ rm -rf /home/jihoh/data/db/*
+	@ docker compose -f $(FILE) -p $(NAME) down --rmi all --volumes --remove-orphans
 
 destroy-volumes:
+	@ rm -rf /home/jihoh/data/wp/*
+	@ rm -rf /home/jihoh/data/db/*
 	@ docker compose -f $(FILE) -p $(NAME) down --volumes --remove-orphans 
 
 ps:
-	@ docker compose -f $(FILE) ps
+	@ docker ps
 
 psa:
-	@ docker compose -f $(FILE) ps -a
+	@ docker ps -a
 
 logs:
 	@ docker compose -f $(FILE) -p $(NAME) logs
