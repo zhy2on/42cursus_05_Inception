@@ -16,6 +16,7 @@ services:
   wordpress:
     depends_on:
       - mariadb
+      - redis
     container_name: wordpress
     build: ./requirements/wordpress/
     ports:
@@ -40,6 +41,18 @@ services:
       - frontend
     volumes:
       - wp:/var/www/html/wordpress
+    env_file:
+      - .env
+    restart: always
+  
+  redis:
+    container_name: redis
+    build:
+      context: ./requirements/redis
+    networks:
+      - backend
+    ports:
+      - 6379:6379
     env_file:
       - .env
     restart: always
