@@ -3,10 +3,10 @@ services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb/
-    ports:
-      - 3306:3306
     networks:
       - backend
+    ports:
+      - 3306:3306
     volumes:
       - db:/var/lib/mysql
     env_file:
@@ -19,11 +19,11 @@ services:
       - redis
     container_name: wordpress
     build: ./requirements/wordpress/
-    ports:
-      - 9000:9000
     networks:
       - frontend
       - backend
+    ports:
+      - 9000:9000
     volumes:
       - wp:/var/www/html/wordpress
     env_file:
@@ -35,10 +35,10 @@ services:
       - wordpress
     container_name: nginx
     build: ./requirements/nginx/
-    ports:
-      - 443:443
     networks:
       - frontend
+    ports:
+      - 443:443
     volumes:
       - wp:/var/www/html/wordpress
     env_file:
@@ -56,6 +56,21 @@ services:
     env_file:
       - .env
     restart: always
+
+  # ftp:
+  #   container_name: ftp
+  #   build:
+  #     context: ./requirements/ftp
+  #   networks:
+  #     - backend
+  #   ports:
+  #     - 20:20
+  #     - 21:21
+  #   volumes:
+  #     - wp:/var/www/html/wordpress
+  #   env_file:
+  #     - .env
+  #   restart: always
 
 networks:
   frontend:

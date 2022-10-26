@@ -15,7 +15,7 @@ while ! redis-cli -h redis &> /dev/null; do
     sleep 2
 done
 
-if ! wp core is-installed --allow-root; then
+if ! wp core is-installed --allow-root &>/dev/null; then
 	wp core download --allow-root
 
 	wp config create --dbname=$WP_DB_NAME --dbuser=$WP_ADMIN --dbpass=$WP_ADMIN_PASSWORD --dbhost=mariadb --allow-root
