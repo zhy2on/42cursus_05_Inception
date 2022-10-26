@@ -5,7 +5,7 @@ RUN apt-get update && \
 
 EXPOSE 6379
 
-COPY ./conf/redis.conf /etc/redis/redis.conf
+COPY ./conf/redis.conf /etc/redis/
 COPY ./tools/entrypoint.sh /tmp/
 
 RUN chmod +x /tmp/entrypoint.sh

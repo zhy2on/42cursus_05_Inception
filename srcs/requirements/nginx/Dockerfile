@@ -5,7 +5,7 @@ RUN apt-get update && \
 
 EXPOSE 443
 
-COPY ./conf/nginx.conf /etc/nginx/sites-available/default
+COPY ./conf/default /etc/nginx/sites-available/
 COPY ./tools/entrypoint.sh /tmp/
 
 RUN chmod +x /tmp/entrypoint.sh

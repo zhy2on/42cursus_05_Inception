@@ -28,7 +28,7 @@ if ! wp core is-installed --allow-root; then
 	wp user create $WP_USER $WP_USER_EMAIL --user_pass=$WP_USER_PASSWORD --role=author --allow-root
 	
 	wp plugin install redis-cache --activate --allow-root
-    wp plugin update --all --allow-root
+	wp plugin update --all --allow-root
 	wp redis enable --allow-root
 
 	chown -R www-data:www-data /var/www/html/wordpress
