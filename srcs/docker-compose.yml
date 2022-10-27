@@ -48,7 +48,7 @@ services:
   redis:
     container_name: redis
     build:
-      context: ./requirements/redis
+      context: ./requirements/bonus/redis
     networks:
       - 42net
     ports:
@@ -60,7 +60,7 @@ services:
   ftp:
     container_name: ftp
     build:
-      context: ./requirements/ftp
+      context: ./requirements/bonus/ftp
     networks:
       - 42net
     ports:
@@ -75,7 +75,7 @@ services:
   adminer:
     container_name: adminer
     build:
-      context: ./requirements/adminer
+      context: ./requirements/bonus/adminer
     networks:
       - 42net
     ports:
