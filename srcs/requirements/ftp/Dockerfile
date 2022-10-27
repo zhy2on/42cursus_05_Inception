@@ -1,7 +1,7 @@
 FROM debian:buster
 
 RUN apt-get update && \
-	apt-get install -y vsftpd
+	apt-get install -y vsftpd dumb-init
 
 EXPOSE 20 21
 
@@ -10,6 +10,6 @@ COPY ./tools/entrypoint.sh /tmp/
 
 RUN chmod +x /tmp/entrypoint.sh
 
-ENTRYPOINT [ "/tmp/entrypoint.sh" ]
+ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 
-CMD [ "vsftpd" ]
+CMD [ "bash", "-c", "/tmp/entrypoint.sh && vsftpd" ]
