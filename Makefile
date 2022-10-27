@@ -15,7 +15,7 @@ NAME = inception
 FILE = srcs/docker-compose.yml
 
 up:
-	@ docker compose -f $(FILE) -p $(NAME) up -d
+	@ docker compose -f $(FILE) -p $(NAME) up
 
 build:
 	@ docker compose -f $(FILE) -p $(NAME) build --no-cache --force-rm
