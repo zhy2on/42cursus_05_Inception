@@ -4,7 +4,7 @@ services:
     container_name: mariadb
     build: ./requirements/mariadb/
     networks:
-      - backend
+      - 42net
     ports:
       - 3306:3306
     volumes:
@@ -20,8 +20,7 @@ services:
     container_name: wordpress
     build: ./requirements/wordpress/
     networks:
-      - frontend
-      - backend
+      - 42net
     ports:
       - 9000:9000
     volumes:
@@ -33,10 +32,11 @@ services:
   nginx:
     depends_on:
       - wordpress
+      - adminer
     container_name: nginx
     build: ./requirements/nginx/
     networks:
-      - frontend
+      - 42net
     ports:
       - 443:443
     volumes:
@@ -50,7 +50,7 @@ services:
     build:
       context: ./requirements/redis
     networks:
-      - backend
+      - 42net
     ports:
       - 6379:6379
     env_file:
@@ -62,7 +62,7 @@ services:
     build:
       context: ./requirements/ftp
     networks:
-      - backend
+      - 42net
     ports:
       - 20:20
       - 21:21
@@ -72,11 +72,22 @@ services:
       - .env
     restart: always
 
+  adminer:
+    container_name: adminer
+    build:
+      context: ./requirements/adminer
+    networks:
+      - 42net
+    ports:
+      - 8000:8000
+    env_file:
+      - .env
+    restart: always
+
 networks:
-  frontend:
-    name: frontend
-  backend:
-    name: backend
+  42net:
+    name: 42net
+    driver: bridge
 
 volumes:
   db:
