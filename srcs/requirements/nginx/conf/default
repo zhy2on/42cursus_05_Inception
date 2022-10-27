@@ -38,6 +38,6 @@ server {
 		fastcgi_split_path_info ^(.+\.php)(/.+)$;
 		fastcgi_pass goaccess:7890;
 		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-		fastcgi_index index.html;
+		fastcgi_index report.html;
 	}
 }

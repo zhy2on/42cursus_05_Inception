@@ -7,9 +7,10 @@ while [ ! -f /var/log/nginx/wordpress_access.log ]; do
     sleep 1
 done
 
+# create nginx log report page
 mkdir -p /var/www/html/wordpress/goaccess
 cd /var/log/nginx/
-goaccess -f wordpress_access.log -a > /var/www/html/wordpress/goaccess/index.html
+goaccess -f wordpress_access.log -a > /var/www/html/wordpress/goaccess/report.html
 chown -R www-data:www-data /var/www/html/wordpress
 
 # create the PID file(/run/php/php7.3-fpm.pid)

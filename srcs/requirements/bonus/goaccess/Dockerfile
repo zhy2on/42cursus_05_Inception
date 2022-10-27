@@ -13,6 +13,7 @@ RUN wget http://tar.goaccess.io/goaccess-1.4.tar.gz && \
 EXPOSE 7890
 
 COPY ./conf/goaccess.conf /usr/local/etc/goaccess/
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
 COPY ./tools/entrypoint.sh /tmp/
 
 RUN chmod +x /tmp/entrypoint.sh
