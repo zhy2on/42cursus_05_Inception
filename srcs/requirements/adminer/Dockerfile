@@ -15,4 +15,4 @@ RUN chmod +x /tmp/entrypoint.sh
 
 ENTRYPOINT [ "/tmp/entrypoint.sh" ]
 
-CMD ["php-fpm7.3", "-F"]
+CMD [ "php-fpm7.3", "-F" ]
