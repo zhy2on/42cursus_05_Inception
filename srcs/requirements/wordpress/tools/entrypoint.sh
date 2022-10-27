@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-cd /var/www/html/wordpress
-
 # waiting for mariadb
 while ! mariadb -hmariadb -u$WP_ADMIN -p$WP_ADMIN_PASSWORD $WP_DB_NAME &> /dev/null; do
 	echo "Waiting for MariaDB ..."
@@ -15,9 +13,13 @@ while ! redis-cli -h redis &> /dev/null; do
     sleep 2
 done
 
-if ! wp core is-installed --allow-root > /dev/null 2>&1; then
-	wp core download --allow-root
+cd /var/www/html/wordpress
 
+if [ ! -f /var/www/html/wordpress/index.php ]; then
+	wp core download --allow-root
+fi
+
+if [ ! -f /var/www/html/wordpress/wp-config.php ]; then
 	wp config create --dbname=$WP_DB_NAME --dbuser=$WP_ADMIN --dbpass=$WP_ADMIN_PASSWORD --dbhost=mariadb --allow-root
 	wp config set WP_REDIS_HOST redis --allow-root
 	wp config set WP_REDIS_PORT 6379 --raw --allow-root
