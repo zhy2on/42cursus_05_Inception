@@ -34,6 +34,7 @@ services:
       - wordpress
       - adminer
       - goaccess
+      - simple-static-web
     container_name: nginx
     build: ./requirements/nginx/
     networks:
@@ -96,6 +97,18 @@ services:
       - 7890:7890
     volumes:
       - log:/var/log/nginx
+    env_file:
+      - .env
+    restart: always
+  
+  simple-static-web:
+    container_name: simple-static-web
+    build:
+      context: ./requirements/bonus/simple-static-web
+    networks:
+      - 42net
+    ports:
+      - 3000:3000
     env_file:
       - .env
     restart: always
