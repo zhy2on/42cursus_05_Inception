@@ -10,12 +10,8 @@ done
 # create nginx log report page
 mkdir -p /var/www/html/wordpress/goaccess
 cd /var/log/nginx/
-goaccess -f wordpress_access.log -a > /var/www/html/wordpress/goaccess/report.html
+goaccess -f wordpress_access.log -a > /var/www/html/wordpress/goaccess/index.html
 chown -R www-data:www-data /var/www/html/wordpress
-
-# create the PID file(/run/php/php7.3-fpm.pid)
-service php7.3-fpm start
-service php7.3-fpm stop
 
 echo "*****Starting GoAccess Container*****"
 
