@@ -1,8 +1,40 @@
 version: "3.9"
 services:
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb/
+    networks:
+      - 42net
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
+    env_file:
+      - .env
+    restart: always
+
+  wordpress:
+    depends_on:
+      - mariadb
+      - redis
+    container_name: wordpress
+    build: ./requirements/wordpress/
+    networks:
+      - 42net
+    ports:
+      - 9000:9000
+    volumes:
+      - wp:/var/www/html/wordpress
+    env_file:
+      - .env
+    restart: always
+
   nginx:
     depends_on:
+      - wordpress
+      - adminer
       - goaccess
+      - simple-static-web
     container_name: nginx
     build: ./requirements/nginx/
     networks:
@@ -13,6 +45,45 @@ services:
     volumes:
       - wp:/var/www/html/wordpress
       - log:/var/log/nginx
+    env_file:
+      - .env
+    restart: always
+  
+  redis:
+    container_name: redis
+    build:
+      context: ./requirements/bonus/redis
+    networks:
+      - 42net
+    ports:
+      - 6379:6379
+    env_file:
+      - .env
+    restart: always
+
+  ftp:
+    container_name: ftp
+    build:
+      context: ./requirements/bonus/ftp
+    networks:
+      - 42net
+    ports:
+      - 20:20
+      - 21:21
+    volumes:
+      - wp:/var/www/html/wordpress
+    env_file:
+      - .env
+    restart: always
+
+  adminer:
+    container_name: adminer
+    build:
+      context: ./requirements/bonus/adminer
+    networks:
+      - 42net
+    ports:
+      - 8000:8000
     env_file:
       - .env
     restart: always
@@ -28,6 +99,18 @@ services:
       - 7890:7890
     volumes:
       - log:/var/log/nginx
+    env_file:
+      - .env
+    restart: always
+  
+  simple-static-web:
+    container_name: simple-static-web
+    build:
+      context: ./requirements/bonus/simple-static-web
+    networks:
+      - 42net
+    ports:
+      - 3000:3000
     env_file:
       - .env
     restart: always

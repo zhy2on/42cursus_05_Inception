@@ -12,6 +12,7 @@ mkdir -p /var/www/html/wordpress/goaccess
 goaccess \
 		-f /var/log/nginx/wordpress_access.log \
 		-o /var/www/html/wordpress/goaccess/index.html \
+		--ws-url=wss://$DOMAIN_NAME/goaccess/ws:443 --port 7890 \
 		--tz="UTC/GMT +9" --real-time-html --daemonize
 chown -R www-data:www-data /var/www/html/wordpress
 
