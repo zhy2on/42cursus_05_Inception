@@ -40,6 +40,7 @@ services:
     networks:
       - 42net
     ports:
+      - 80:80
       - 443:443
     volumes:
       - wp:/var/www/html/wordpress
@@ -94,6 +95,7 @@ services:
     networks:
       - 42net
     ports:
+      - 7000:7000
       - 7890:7890
     volumes:
       - log:/var/log/nginx

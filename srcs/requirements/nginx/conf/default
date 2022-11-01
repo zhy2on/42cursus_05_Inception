@@ -34,12 +34,13 @@ server {
 	}
 
 	location /goaccess/ {
-		proxy_pass http://goaccess:7890/;
+		proxy_pass https://goaccess:7000/;
 		proxy_http_version 1.1;
 		proxy_set_header Upgrade $http_upgrade;
 		proxy_set_header Connection 'upgrade';
 		proxy_set_header Host $host;
 		proxy_cache_bypass $http_upgrade;
+		proxy_ssl_server_name on;
 	}
 
 	location /simple-static-web/ {
