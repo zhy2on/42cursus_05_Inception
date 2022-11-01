@@ -10,6 +10,6 @@ COPY ./tools/entrypoint.sh /tmp/
 
 RUN chmod +x /tmp/entrypoint.sh
 
-ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
+ENTRYPOINT [ "/usr/bin/dumb-init", "/tmp/entrypoint.sh" ]
 
-CMD [ "bash", "-c", "/tmp/entrypoint.sh && vsftpd" ]
+CMD [ "vsftpd" ]
