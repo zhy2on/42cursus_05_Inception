@@ -1,9 +1,8 @@
 FROM debian:buster
 
-RUN apt-get update && \
-	apt-get install -y \
-		libncursesw5-dev libgeoip-dev libtokyocabinet-dev build-essential \
-		wget make nginx dumb-init
+RUN apt-get update && apt-get install -y \
+	libncursesw5-dev libgeoip-dev libtokyocabinet-dev build-essential \
+	wget make nginx dumb-init
 
 RUN wget https://tar.goaccess.io/goaccess-1.6.4.tar.gz && \
 	tar -xzvf goaccess-1.6.4.tar.gz && cd goaccess-1.6.4/ && \
