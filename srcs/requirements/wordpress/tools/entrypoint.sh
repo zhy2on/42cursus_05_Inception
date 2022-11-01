@@ -36,9 +36,9 @@ if [ ! -f /var/www/html/wordpress/wp-config.php ]; then
 	chown -R www-data:www-data /var/www/html/wordpress
 fi
 
-# create the PID file(/run/php/php7.3-fpm.pid)
-service php7.3-fpm start
-service php7.3-fpm stop
+# create the PID file(/run/php/php8.1-fpm.pid)
+service php8.1-fpm start
+service php8.1-fpm stop
 
 echo "*****Starting Wordpress Container*****"
 
