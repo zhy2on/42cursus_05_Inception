@@ -1,4 +1,7 @@
 server {
+	listen 80;
+	listen [::]:80;
+
 	listen 443 ssl;
 	listen [::]:443 ssl;
 
@@ -14,37 +17,13 @@ server {
 	server_name {$DOMAIN_NAME};
 
 	location / {
-		try_files $uri /index.php?$args;
-	}
-
-	location ~ \.php$ {
-		include /etc/nginx/fastcgi_params;
-		fastcgi_split_path_info ^(.+\.php)(/.+)$;
-		fastcgi_pass wordpress:9000;
-		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-		fastcgi_index index.php;
-	}
-
-	location ~ ^/adminer(/.*$|$) {
-		include /etc/nginx/fastcgi_params;
-		fastcgi_split_path_info ^(.+\.php)(/.+)$;
-		fastcgi_pass adminer:8000;
-		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-		fastcgi_index index.php;
+		try_files $uri $uri/ =404;
 	}
 
 	location /goaccess/ {
-		proxy_pass https://goaccess:7000/;
-		proxy_http_version 1.1;
-		proxy_set_header Upgrade $http_upgrade;
-		proxy_set_header Connection 'upgrade';
-		proxy_set_header Host $host;
-		proxy_cache_bypass $http_upgrade;
-		proxy_ssl_server_name on;
-	}
-
-	location /simple-static-web/ {
-		proxy_pass http://simple-static-web:3000/;
+#		proxy_ssl_server_name on;
+#		proxy_ssl_protocols TLSv1.3;
+		proxy_pass http://goaccess:7000/;
 		proxy_http_version 1.1;
 		proxy_set_header Upgrade $http_upgrade;
 		proxy_set_header Connection 'upgrade';
