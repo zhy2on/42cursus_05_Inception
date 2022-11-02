@@ -6,7 +6,7 @@ RUN apt-get update && \
 EXPOSE 3306
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
-COPY ./conf/debian.cnf /tmp/
+COPY ./conf/debian.cnf /etc/mysql/
 COPY ./conf/db-config.sql /tmp/
 COPY ./tools/entrypoint.sh /tmp/
 
