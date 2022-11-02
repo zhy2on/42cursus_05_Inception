@@ -2,13 +2,13 @@
 set -e
 
 # waiting for mariadb
-while ! mariadb -hmariadb -u$WP_ADMIN -p$WP_ADMIN_PASSWORD $WP_DB_NAME &> /dev/null; do
+while ! mariadb -hmariadb -u$WP_ADMIN -p$WP_ADMIN_PASSWORD $WP_DB_NAME > /dev/null 2>&1; do
 	echo "Waiting for MariaDB ..."
     sleep 2
 done
 
 # waiting for redis
-while ! redis-cli -h redis &> /dev/null; do
+while ! redis-cli -h redis > /dev/null 2>&1; do
 	echo "Waiting for Redis ..."
     sleep 2
 done
